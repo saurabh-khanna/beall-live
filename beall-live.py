@@ -21,7 +21,7 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 st.markdown("## :bulb: Beall Live")
 st.markdown("---")
 
-st.write("Application providing weekly updates on how much of the Beall's list is alive.")
+st.write("This application provides weekly updates on how much of the [Beall's list](https://beallslist.net/) of predatory scholarly open‑access publishers is alive.")
 
 # Sidebar
 st.sidebar.markdown("## :bulb: Beall Live")
@@ -40,7 +40,7 @@ st.sidebar.info(
 
 st.sidebar.markdown("**:scroll: License**")
 st.sidebar.info(
-    "[GNU Affero General Public License v3.0](mailto:saurabhkhanna@stanford.edu)"
+    "[GNU Affero General Public License v3.0](https://github.com/saurabh-khanna/beall-live/blob/main/LICENSE)"
 )
 
 df = pd.read_csv(Path("data/df_weekly.csv"))
@@ -49,8 +49,9 @@ alive_count = len(df[df["status"] == 200])
 alive_perc = round((alive_count / len(df)) * 100, 2)
 
 st.markdown("&nbsp;")
+st.write("_Updated: " + datetime.date.today().strftime("%B %d, %Y") + "_")
 
-st.info("_Update: " + datetime.date.today().strftime("%B %d, %Y") + "_   \n__" + str(alive_perc) + "%__ publisher domains on Beall's list are alive this week.")
+st.info("__" + str(alive_perc) + "%__ publisher domains on Beall's list are alive this week.")
 st.write("\n")
 
 df_eco = pd.DataFrame(
