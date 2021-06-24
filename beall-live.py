@@ -21,7 +21,9 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 st.markdown("## :bulb: Beall Live")
 st.markdown("---")
 
-st.write("This application provides weekly updates on how much of the [Beall's list](https://beallslist.net/) of predatory scholarly open‑access publishers is alive.")
+st.write(
+    "This application provides weekly updates on how much of the [Beall's list](https://beallslist.net/) of predatory scholarly open‑access publishers is alive."
+)
 
 # Sidebar
 st.sidebar.markdown("## :bulb: Beall Live")
@@ -34,9 +36,7 @@ st.sidebar.info(
 )
 
 st.sidebar.markdown("**:octopus: Maitainer**")
-st.sidebar.info(
-    "[Saurabh Khanna](mailto:saurabhkhanna@stanford.edu)"
-)
+st.sidebar.info("[Saurabh Khanna](https://saurabh-khanna.github.io/)")
 
 st.sidebar.markdown("**:scroll: License**")
 st.sidebar.info(
@@ -51,7 +51,11 @@ alive_perc = round((alive_count / len(df)) * 100, 2)
 st.markdown("&nbsp;")
 st.write("_Updated: " + datetime.date.today().strftime("%B %d, %Y") + "_")
 
-st.info("__" + str(alive_perc) + "%__ publisher domains on Beall's list are alive this week.")
+st.info(
+    "__"
+    + str(alive_perc)
+    + "%__ publisher domains on Beall's list are alive this week."
+)
 st.write("\n")
 
 df_eco = pd.DataFrame(
@@ -88,10 +92,18 @@ st.markdown("&nbsp;")
 navigate = st.radio("View", ["Alive domains", "Dead domains"], 0)
 
 if navigate == "Alive domains":
-    df = df[df["status"] == 200][['publisher', 'url']].sort_values(by=["publisher"]).reset_index(drop=True)
-    st.table(df.assign(hack='').set_index('hack'))
+    df = (
+        df[df["status"] == 200][["publisher", "url"]]
+        .sort_values(by=["publisher"])
+        .reset_index(drop=True)
+    )
+    st.table(df.assign(hack="").set_index("hack"))
 
 if navigate == "Dead domains":
-    df = df[df["status"] != 200][['publisher', 'url']].sort_values(by=["publisher"]).reset_index(drop=True)
+    df = (
+        df[df["status"] != 200][["publisher", "url"]]
+        .sort_values(by=["publisher"])
+        .reset_index(drop=True)
+    )
     df = df[df["publisher"] != "DOAJ"]
-    st.table(df.assign(hack='').set_index('hack'))
+    st.table(df.assign(hack="").set_index("hack"))
