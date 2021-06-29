@@ -49,7 +49,7 @@ alive_count = len(df[df["status"] == 200])
 alive_perc = round((alive_count / len(df)) * 100, 2)
 
 st.markdown("&nbsp;")
-st.write("_Updated: " + datetime.date.today().strftime("%B %d, %Y") + "_")
+st.write("_Updated: " + df["date"].iloc[0] + "_")
 
 st.info(
     "__"
